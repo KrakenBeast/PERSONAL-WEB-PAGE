@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>John Loid Flores — Portfolio</title>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+
+      --bg: #0f172a;       
+      --panel: #111827;     
+      --text: #e5e7eb;      
+      --muted: #a3a3a3;     
+      --accent: #60a5fa;     
+      --accent-2: #f59e0b;   
+      --card: #0b1220;      
+      --border: #1f2937;
+
+
+      --radius: 14px;
+      --shadow: 0 10px 30px rgba(0,0,0,0.35);
+      --maxw: 1100px;
+      --gap: 22px;
+      --line: 1.65;
+    }
+
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; background: linear-gradient(180deg, #0b1220, var(--bg)); color: var(--text); }
+    body { font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif; line-height: var(--line); }
+
+
+    .container { max-width: var(--maxw); margin: 0 auto; padding: 28px; }
+    
+    /* MODIFIED: Header now only has one column */
+    header { display: grid; grid-template-columns: 1fr; gap: var(--gap); align-items: center; }
+    @media (max-width: 900px) { header { grid-template-columns: 1fr; } }
+
+    /* BACKGROUND */
+    .hero {
+      background: radial-gradient(1200px 600px at 10% 10%, rgba(96,165,250,0.12), transparent),
+                  radial-gradient(800px 400px at 90% 0%, rgba(245,158,11,0.10), transparent),
+                  var(--panel);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 36px;
+      
+      /* Make the hero a flex container to align content and image */
+      display: flex;
+      justify-content: space-between; 
+      align-items: center; 
+    }
+    
+    .hero-text {
+        max-width: 60%; /* Limits text width */
+        flex-shrink: 1;
+    }
+
+    /* Styles for the large, right-aligned profile image */
+    .profile-img-floating {
+      width: 220px; 
+      height: 220px;
+      border-radius: 50%; 
+      object-fit: cover;
+      border: 4px solid var(--accent); 
+      box-shadow: 0 0 0 10px rgba(96,165,250,0.15); 
+      margin-left: 30px; 
+      flex-shrink: 0; 
+    }
+    
+    /* MEDIA QUERY ADJUSTMENT for mobile
+    @media (max-width: 750px) {
+        .hero {
+            flex-direction: column; 
+            align-items: center;
+            text-align: center;
+        }
+        .hero-text {
+            max-width: 100%; 
+            order: 2; 
+        }
+        .profile-img-floating {
+            order: 1; 
+            margin-bottom: 30px;
+            margin-left: 0;
+        }
+        .tag { 
+            justify-content: center; 
+        }
+    }
+        */
+
+    /* NEW STYLES */
+
+
+    .tag { display: inline-flex; gap: 8px; align-items: center; color: var(--muted); font-weight: 600; letter-spacing: 0.02em; }
+    .tag .dot { width: 8px; height: 8px; border-radius: 999px; background: var(--accent); box-shadow: 0 0 16px rgba(96,165,250,0.8); }
+
+    h1 {
+      font-family: "Playfair Display", serif;
+      font-weight: 700;
+      font-size: clamp(28px, 6vw, 48px);
+      margin: 14px 0 10px;
+      letter-spacing: 0.3px;
+    }
+    .subtitle { color: var(--muted); max-width: 58ch; }
+
+    nav {
+      display: flex; gap: 12px; flex-wrap: wrap; justify-content: flex-start;
+    }
+    .navlink {
+      color: var(--text); text-decoration: none; padding: 10px 14px; border-radius: 10px;
+      border: 1px solid var(--border); background: linear-gradient(180deg, #0d1423, #0a1320);
+    }
+    .navlink:hover { border-color: #334155; background: #0f1930; }
+
+    section {
+      margin-top: 32px;
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 28px;
+    }
+    .section-title {
+      display: flex; align-items: baseline; justify-content: space-between; gap: 12px;
+      margin-bottom: 18px;
+    }
+    .section-title h2 {
+      font-size: clamp(20px, 3vw, 28px); margin: 0;
+      font-weight: 700; letter-spacing: 0.2px;
+    }
+    .section-title .hint { color: var(--muted); font-size: 14px; }
+
+    .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--gap); }
+    @media (max-width: 900px) { .grid { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 600px) { .grid { grid-template-columns: 1fr; } }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 18px;
+      transition: transform 200ms ease, border-color 200ms ease, box-shadow 200ms ease;
+    }
+    .card:hover { transform: translateY(-4px); border-color: #334155; box-shadow: 0 16px 36px rgba(0,0,0,0.45); }
+
+    .card h3 { margin: 6px 0 6px; font-size: 18px; }
+    .meta { color: var(--muted); font-size: 14px; }
+    .pill {
+      display: inline-block; padding: 6px 10px; border-radius: 999px;
+      background: rgba(96,165,250,0.12); color: #93c5fd; border: 1px solid rgba(96,165,250,0.35);
+      font-size: 12px; font-weight: 600; letter-spacing: 0.02em;
+    }
+
+    footer { text-align: center; color: var(--muted); padding: 24px 0 40px; }
+    .social { display: inline-flex; gap: 12px; margin-top: 12px; }
+    .social a {
+      color: var(--text); text-decoration: none; border: 1px solid var(--border);
+      background: #0a1320; padding: 8px 12px; border-radius: 10px;
+    }
+    .social a:hover { background: #0f1930; border-color: #334155; }
+
+    a:focus-visible, button:focus-visible {
+      outline: 2px solid var(--accent); outline-offset: 2px;
+    }
+    ::selection { background: rgba(96,165,250,0.35); }
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <header>
+      <div class="hero">
+        
+        <div class="hero-text">
+            <div class="tag">
+              <span class="dot" aria-hidden="true"></span>
+              <span>Available for internships</span>
+            </div>
+            <h1>John Loid Flores</h1>
+            <p class="subtitle">I boost your IT success by instantly delivering information, coding help, and innovative ideas for your projects.</p>
+            <div style="margin-top:16px; display:flex; gap:10px; flex-wrap:wrap;">
+              <a class="navlink" href="#about">About</a>
+              <a class="navlink" href="#projects">Projects</a>
+              <a class="navlink" href="#skills">Skills</a>
+              <a class="navlink" href="#contact">Contact</a>
+            </div>
+        </div>
+        <img class="profile-img-floating" src="C:\Users\LENOVO\Downloads\PROFILE.png" alt="Professional headshot of John Loid Flores">
+        
+      </div>
+    </header>
+
+    <section aria-label="Profile snapshot">
+        <div class="section-title">
+          <h2>Profile snapshot</h2>
+          <span class="hint">Short and relevant</span>
+        </div>
+        <p><strong>Current:</strong> BS in Information Technology, San Sebastian College Recoletos de Cavite.</p>
+        <p><strong>Focus:</strong> I focus on delivering powerful information and creative tools to maximize your social impact and technical understanding.</p>
+        <p><strong>Location:</strong> Cavite City, Philippines · <span class="pill">Open to remote</span></p>
+    </section>
+
+<section id="projects">
+  <div class="section-title">
+    <h2>Selected Projects</h2>
+    <span class="hint">Impact over quantity</span>
+  </div>
+
+  <div class="grid">
+
+    <!-- PROJECT 1 -->
+    <article class="card">
+      <span class="pill">Database System</span>
+      <h3>Blood Donation Management System</h3>
+      <p class="meta">SQL, MySQL, PHP · 2024</p>
+      <p>Designed and implemented a complete relational <strong>database system</strong> for managing donor records, blood inventory, and clinic schedules. Improved data retrieval efficiency and supported accurate, secure tracking of donation history using role-based access and structured queries.</p>
+      <a class="navlink" href="#" aria-label="Open Blood Donation System Project">View repo</a>
+    </article>
+
+    <!-- PROJECT 2 -->
+    <article class="card">
+      <span class="pill">UI/UX Design</span>
+      <h3>Mobile App UI Prototype</h3>
+      <p class="meta">Figma, Wireframing, User Testing · 2024</p>
+      <p>Created high-fidelity UI designs for an educational mobile app, focusing on clean layouts, intuitive navigation, and consistent visual hierarchy. Conducted usability tests to refine interactions and improve user flow efficiency.</p>
+      <a class="navlink" href="#" aria-label="Open App Design Project">View repo</a>
+    </article>
+
+    <!-- PROJECT 3 -->
+    <article class="card">
+      <span class="pill">Mobile/Web App</span>
+      <h3>App Development & Designing</h3>
+      <p class="meta">Android Studio (Java), Firebase, UI/UX · 2025</p>
+      <p>Developed and designed a functional mobile application featuring <strong>real-time data synchronization</strong>, user authentication, and responsive layouts. Implemented core app modules and deployed a stable build for testing within a local environment.</p>
+      <a class="navlink" href="#" aria-label="Open App Development Project">View repo</a>
+    </article>
+
+  </div>
+</section>
+
+    <section id="skills">
+      <div class="section-title">
+        <h2>Skills</h2>
+        <span class="hint">Tools and strengths</span>
+      </div>
+      <div class="grid">
+        <div class="card">
+          <h3>Frontend</h3>
+          <p><strong>Languages:</strong> HTML, CSS, JavaScript</p>
+          <p><strong>Frameworks:</strong> React, Vue</p>
+          <p><strong>UI:</strong> Accessibility, responsive design, component libraries</p>
+        </div>
+        <div class="card">
+   <h3>Data & Backend</h3>
+            <p><strong>Languages:</strong> Python, Node.js, SQL</p>
+            <p><strong>Databases:</strong> SQLite, MySQL</p>
+            <p><strong>Tools:</strong> SSMS, phpMyAdmin, Express, REST APIs</p>
+            <p><strong>Focus:</strong> Clean architecture, performance basics</p>
+        </div>
+        <div class="card">
+          <h3>Creative</h3>
+          <p><strong>Design:</strong> Figma, typography, color systems</p>
+          <p><strong>Writing:</strong> Project summaries, documentation</p>
+          <p><strong>Soft skills:</strong> Collaboration, presentations</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="about">
+      <div class="section-title">
+        <h2>About</h2>
+        <span class="hint">A human story</span>
+      </div>
+      <p style="text-align: justify;">
+    I am a student of San Sebastian College–Recoletos de Cavite with a strong aspiration to become a well-constructed and highly competent individual in the field of Information Technology. My academic journey is not only about acquiring technical knowledge and practical skills but also about cultivating discipline, critical thinking, and ethical responsibility. I aim to develop myself into a professional who can adapt to the rapid changes in technology, contribute to innovative solutions, and uphold values of integrity and collaboration. With determination and a commitment to lifelong learning, I envision myself emerging as a holistic IT practitioner prepared to make meaningful contributions to both the industry and society.
+  </p>
+    </section>
+
+    <section id="contact">
+      <div class="section-title">
+        <h2>Contact</h2>
+        <span class="hint">Let’s connect</span>
+      </div>
+      <p><strong>Email:</strong> s.johnloid.flores@sscr.edu</p>
+      <p><strong>LinkedIn:</strong> linkedin.com/in/yourhandle</p>
+      <p><strong>GitHub:</strong> github.com/yourhandle</p>
+      <p class="meta">Tip: Use a professional email and keep response expectations clear.</p>
+    </section>
+
+    <footer>
+      <div>© <span id="year"></span> John Loid Flores. Built with care.</div>
+      <div class="social">
+        <a href="#" aria-label="Open LinkedIn">LinkedIn</a>
+        <a href="#" aria-label="Open GitHub">GitHub</a>
+        <a href="#" aria-label="Open Email">Email</a>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
